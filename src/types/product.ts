@@ -39,3 +39,44 @@ export interface PaginatedResponse<T> {
     limit: number;
     totalPages: number;
 }
+
+export type SellerProductStatus = 'draft' | 'active' | 'out_of_stock' | 'archived';
+
+export interface SellerProductVariant {
+    id: string;
+    name: string;
+    options: string[];
+}
+
+export interface SellerProduct {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    categories: string[];
+    tags?: string[];
+    status: SellerProductStatus;
+    stock: number;
+    variants: SellerProductVariant[];
+    images: string[];
+    totalSales?: number;
+    createdAt: string;
+    updatedAt?: string;
+}
+
+export interface SellerProductFilters {
+    search?: string;
+    status?: SellerProductStatus;
+    category?: string;
+    page?: number;
+    limit?: number;
+}
+
+export type SellerProductPayload = Omit<SellerProduct, 'id' | 'createdAt' | 'updatedAt' | 'totalSales'>;
+
+export interface SellerAnalyticsSummary {
+    totalProducts: number;
+    totalSales: number;
+    topProductName?: string;
+    topProductSales?: number;
+}

@@ -2,10 +2,11 @@
 
 import React from 'react';
 import { Box, Typography, ToggleButtonGroup, ToggleButton } from '@mui/material';
+import { AvatarStyleParams } from '@/src/types/avatars';
 
 interface ProductAvatarStyleControlsProps {
-  styleParams: Record<string, any>;
-  onChange: (key: string, value: any) => void;
+  styleParams: AvatarStyleParams;
+  onChange: (key: string, value: AvatarStyleParams[string]) => void;
 }
 
 export const ProductAvatarStyleControls: React.FC<ProductAvatarStyleControlsProps> = ({
