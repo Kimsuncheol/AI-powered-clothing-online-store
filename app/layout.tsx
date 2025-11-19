@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/src/context/AuthContext";
+import { AiStylistChatProvider } from "@/src/components/ai/AiStylistChatProvider";
+import { AiStylistChatFloatingButton } from "@/src/components/ai/AiStylistChatFloatingButton";
+import { AiStylistChatModal } from "@/src/components/ai/AiStylistChatModal";
+import ThemeRegistry from "@/src/components/ThemeRegistry/ThemeRegistry";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,9 +32,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        <ThemeRegistry>
+          <AuthProvider>
+            <AiStylistChatProvider>
+              {children}
+              <AiStylistChatFloatingButton />
+              <AiStylistChatModal />
+            </AiStylistChatProvider>
+          </AuthProvider>
+        </ThemeRegistry>
       </body>
     </html>
   );

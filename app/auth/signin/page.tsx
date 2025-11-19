@@ -75,12 +75,10 @@ export default function SigninPage() {
                         {loading ? 'Signing in...' : 'Sign In'}
                     </Button>
                     <Box display="flex" justifyContent="flex-end">
-                        <Link href="/auth/signup" passHref legacyBehavior>
-                            <MuiLink variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </MuiLink>
-                        </Link>
-                    </Box>
+            <MuiLink component={Link} href="/auth/signup" variant="body2">
+              {"Don't have an account? Sign Up"}
+            </MuiLink>
+          </Box>
                 </Box>
             </Box>
         </Container>

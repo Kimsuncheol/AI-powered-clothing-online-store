@@ -17,7 +17,7 @@ export const TrendingCollections = () => {
             </Typography>
             <Grid container spacing={4}>
                 {collections.map((collection) => (
-                    <Grid item key={collection.id} xs={12} md={4}>
+                    <Grid key={collection.id} size={{ xs: 12, md: 4 }}>
                         <Paper
                             sx={{
                                 position: 'relative',

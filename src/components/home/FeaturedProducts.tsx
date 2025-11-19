@@ -20,7 +20,7 @@ export const FeaturedProducts = () => {
             </Typography>
             <Grid container spacing={4}>
                 {featuredProducts.map((product) => (
-                    <Grid item key={product.id} xs={12} sm={6} md={3}>
+                    <Grid key={product.id} size={{ xs: 12, sm: 6, md: 3 }}>
                         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                             <CardMedia
                                 component="img"
@@ -41,9 +41,15 @@ export const FeaturedProducts = () => {
                                 </Typography>
                             </CardContent>
                             <Box sx={{ p: 2 }}>
-                                <Link href={`/products/${product.id}`} passHref legacyBehavior>
-                                    <Button size="small" variant="contained" fullWidth>View Details</Button>
-                                </Link>
+                                <Button
+                                  component={Link}
+                                  href={`/products/${product.id}`}
+                                  size="small"
+                                  variant="contained"
+                                  fullWidth
+                                >
+                                  View Details
+                                </Button>
                             </Box>
                         </Card>
                     </Grid>
