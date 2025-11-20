@@ -2,14 +2,29 @@
 
 import React, { useState } from 'react';
 import { useAuth } from '@/src/hooks/useAuth';
-import { TextField, Button, Container, Typography, Box, Alert, Link as MuiLink } from '@mui/material';
+import {
+    TextField,
+    Button,
+    Container,
+    Typography,
+    Box,
+    Alert,
+    Link as MuiLink,
+    InputAdornment,
+    IconButton,
+    useTheme,
+} from '@mui/material';
 import Link from 'next/link';
 import DevSignInButton from '@/src/components/auth/DevSignInButton';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 export default function SigninPage() {
     const { signIn } = useAuth();
+    const theme = useTheme();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
@@ -60,11 +75,28 @@ export default function SigninPage() {
                         fullWidth
                         name="password"
                         label="Password"
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         id="password"
                         autoComplete="current-password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={() => setShowPassword((prev) => !prev)}
+                                        edge="end"
+                                        aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                    >
+                                        {showPassword ? (
+                                            <VisibilityIcon htmlColor={theme.palette.text.primary} />
+                                        ) : (
+                                            <VisibilityOffIcon htmlColor={theme.palette.text.primary} />
+                                        )}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                     <Button
                         type="submit"
