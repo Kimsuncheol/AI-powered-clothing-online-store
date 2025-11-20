@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useAuth } from '@/src/hooks/useAuth';
 import { TextField, Button, Container, Typography, Box, Alert, Link as MuiLink } from '@mui/material';
 import Link from 'next/link';
+import DevSignInButton from '@/src/components/auth/DevSignInButton';
 
 export default function SigninPage() {
     const { signIn } = useAuth();
@@ -74,11 +75,12 @@ export default function SigninPage() {
                     >
                         {loading ? 'Signing in...' : 'Sign In'}
                     </Button>
+                    <DevSignInButton />
                     <Box display="flex" justifyContent="flex-end">
-            <MuiLink component={Link} href="/auth/signup" variant="body2">
-              {"Don't have an account? Sign Up"}
-            </MuiLink>
-          </Box>
+                        <MuiLink component={Link} href="/auth/signup" variant="body2">
+                            {"Don't have an account? Sign Up"}
+                        </MuiLink>
+                    </Box>
                 </Box>
             </Box>
         </Container>

@@ -5,13 +5,24 @@ import { User, Role, LoginCredentials, SignupCredentials } from '@/src/types/aut
 import { authApi } from '@/src/lib/api/auth';
 import { useRouter } from 'next/navigation';
 
+const DEV_USER: User = {
+    id: 'dev-user',
+    email: 'dev@example.com',
+    name: 'Dev User',
+    role: 'buyer',
+    avatarUrl: null,
+};
+
 interface AuthContextType {
     user: User | null;
     role: Role | null;
+    token: string | null;
+    isAuthenticated: boolean;
     isLoading: boolean;
     signIn: (credentials: LoginCredentials) => Promise<void>;
     signUp: (credentials: SignupCredentials) => Promise<void>;
     signOut: () => Promise<void>;
+    signInDev: () => void;
     fetchMe: () => Promise<void>;
 }
 
@@ -19,6 +30,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
+    const [token, setToken] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
 
@@ -43,6 +55,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         try {
             const response = await authApi.signin(credentials);
             setUser(response.user);
+            setToken(response.token);
             // Redirect based on role could happen here or in the component
             router.push('/');
         } catch (error) {
@@ -57,6 +70,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         try {
             const response = await authApi.signup(credentials);
             setUser(response.user);
+            setToken(response.token);
             router.push('/');
         } catch (error) {
             throw error;
@@ -70,6 +84,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         try {
             await authApi.signout();
             setUser(null);
+            setToken(null);
             router.push('/auth/signin');
         } catch (error) {
             console.error('Sign out failed:', error);
@@ -78,13 +93,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
     };
 
+    const signInDev = () => {
+        setUser(DEV_USER);
+        setToken('dev-token');
+    };
+
     const value = {
         user,
         role: user?.role || null,
+        token,
+        isAuthenticated: Boolean(user),
         isLoading,
         signIn,
         signUp,
         signOut,
+        signInDev,
         fetchMe,
     };
 

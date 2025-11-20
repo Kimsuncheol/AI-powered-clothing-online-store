@@ -35,3 +35,19 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 # AI-powered-clothing-online-store
+
+## 1.5 Non-Functional Requirements (Frontend)
+
+### NFR-FE-01 – Performance
+- Initial page load must complete in under 3 seconds under typical network conditions.
+- Apply image optimization and code-splitting for all user-facing routes.
+
+### NFR-FE-02 – Accessibility
+- Follow WCAG 2.1 AA standards for key flows (authentication, checkout, AI chat).
+
+### NFR-FE-03 – Theming
+- Provide a light/dark/system theme toggle and persist the user’s choice in `localStorage`.
+- Wrap the app with the MUI theme provider.
+
+### NFR-FE-04 – Modularity & Reusability
+- Common components (buttons, cards, dialogs, forms) must remain reusable across features.

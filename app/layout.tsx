@@ -6,6 +6,9 @@ import { AiStylistChatProvider } from "@/src/components/ai/AiStylistChatProvider
 import { AiStylistChatFloatingButton } from "@/src/components/ai/AiStylistChatFloatingButton";
 import { AiStylistChatModal } from "@/src/components/ai/AiStylistChatModal";
 import ThemeRegistry from "@/src/components/ThemeRegistry/ThemeRegistry";
+import HeaderVisibility from "@/src/components/layout/HeaderVisibility";
+import { AppearanceProvider } from "@/src/context/AppearanceContext";
+import Box from "@mui/material/Box";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,15 +35,23 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeRegistry>
-          <AuthProvider>
-            <AiStylistChatProvider>
-              {children}
-              <AiStylistChatFloatingButton />
-              <AiStylistChatModal />
-            </AiStylistChatProvider>
-          </AuthProvider>
-        </ThemeRegistry>
+        <AppearanceProvider>
+          <ThemeRegistry>
+            <Box sx={{ minHeight: "100vh", bgcolor: "background.default" }}>
+              <AuthProvider>
+                <AiStylistChatProvider>
+                  <HeaderVisibility>
+                    <>
+                      {children}
+                      <AiStylistChatFloatingButton />
+                      <AiStylistChatModal />
+                    </>
+                  </HeaderVisibility>
+                </AiStylistChatProvider>
+              </AuthProvider>
+            </Box>
+          </ThemeRegistry>
+        </AppearanceProvider>
       </body>
     </html>
   );
