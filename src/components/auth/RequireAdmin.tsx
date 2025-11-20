@@ -16,7 +16,9 @@ export const RequireAdmin = ({ children }: { children: React.ReactNode }) => {
     );
   }
 
-  if (!user || user.role !== 'admin') {
+  const hasAdminRole = !!user?.roles?.includes('admin') || user?.role === 'admin';
+
+  if (!user || !hasAdminRole) {
     return <AdminNotAuthorized />;
   }
 

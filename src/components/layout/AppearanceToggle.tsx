@@ -1,27 +1,27 @@
 'use client';
 
 import { IconButton, Tooltip } from '@mui/material';
-import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import ComputerOutlinedIcon from '@mui/icons-material/ComputerOutlined';
+import { useTheme } from '@mui/material/styles';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import ComputerIcon from '@mui/icons-material/Computer';
 import { useAppearance } from '@/src/context/AppearanceContext';
 
-const LABELS = ['Light', 'Dark', 'System'];
-
-const icons = [
-  <WbSunnyOutlinedIcon key="light" fontSize="small" />,
-  <DarkModeOutlinedIcon key="dark" fontSize="small" />,
-  <ComputerOutlinedIcon key="system" fontSize="small" />,
-];
-
 const AppearanceToggle = () => {
-  const { modeIndex, cycleMode } = useAppearance();
-  const label = LABELS[modeIndex] ?? LABELS[0];
+  const { mode, cycleMode } = useAppearance();
+  const theme = useTheme();
+  const iconColor = theme.palette.text.primary;
+
+  const renderIcon = () => {
+    if (mode === 'light') return <LightModeIcon htmlColor={iconColor} fontSize="small" />;
+    if (mode === 'dark') return <DarkModeIcon htmlColor={iconColor} fontSize="small" />;
+    return <ComputerIcon htmlColor={iconColor} fontSize="small" />;
+  };
 
   return (
-    <Tooltip title={`Appearance: ${label}`}>
-      <IconButton color="inherit" onClick={cycleMode} aria-label="Toggle appearance">
-        {icons[modeIndex] ?? icons[0]}
+    <Tooltip title={`Appearance: ${mode}`}>
+      <IconButton onClick={cycleMode} aria-label="Toggle appearance">
+        {renderIcon()}
       </IconButton>
     </Tooltip>
   );

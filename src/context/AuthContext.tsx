@@ -9,7 +9,8 @@ const DEV_USER: User = {
     id: 'dev-user',
     email: 'dev@example.com',
     name: 'Dev User',
-    role: 'buyer',
+    role: 'admin',
+    roles: ['admin', 'seller'],
     avatarUrl: null,
 };
 
@@ -100,7 +101,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const value = {
         user,
-        role: user?.role || null,
+        role: user?.role || user?.roles?.[0] || null,
         token,
         isAuthenticated: Boolean(user),
         isLoading,

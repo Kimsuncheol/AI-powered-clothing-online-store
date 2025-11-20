@@ -21,7 +21,7 @@ export const RequireRole: React.FC<RequireRoleProps> = ({ children, roles }) => 
         }
     }, [isLoading, user, router]);
 
-    if (isLoading) {
+  if (isLoading) {
         return (
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
                 <CircularProgress />
@@ -29,7 +29,9 @@ export const RequireRole: React.FC<RequireRoleProps> = ({ children, roles }) => 
         );
     }
 
-    if (!user || !roles.includes(user.role)) {
+    const userRoles = user?.roles ?? (user?.role ? [user.role] : []);
+
+    if (!user || !roles.some((role) => userRoles.includes(role))) {
         return (
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
                 <Typography variant="h5" color="error">
