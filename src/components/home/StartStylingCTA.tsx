@@ -27,24 +27,20 @@ export const StartStylingCTA = () => {
                 <Typography variant="h6" paragraph sx={{ mb: 4 }}>
                     Let our AI Stylist help you find the perfect outfit for any occasion.
                 </Typography>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    size="large"
+                <Button 
+                    variant="contained" 
+                    size="large" 
+                    href="/styling"
                     startIcon={<AutoAwesomeIcon />}
-                    onClick={handleStartStyling}
-                    sx={{
-                        px: 4,
-                        py: 1.5,
-                        fontSize: '1.2rem',
-                        backgroundColor: 'white',
+                    sx={{ 
+                        bgcolor: 'white', 
                         color: 'primary.main',
                         '&:hover': {
-                            backgroundColor: 'grey.100',
+                            bgcolor: 'grey.100'
                         }
                     }}
                 >
-                    Start Styling
+                    Start Styling Session
                 </Button>
             </Container>
         </Box>

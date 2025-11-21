@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/src/context/AuthContext";
 import { AiStylistChatProvider } from "@/src/components/ai/AiStylistChatProvider";
-import { AiStylistChatFloatingButton } from "@/src/components/ai/AiStylistChatFloatingButton";
+import { AiStylistFloatingVisibility } from "@/src/components/ai/AiStylistFloatingVisibility";
 import { AiStylistChatModal } from "@/src/components/ai/AiStylistChatModal";
 import ThemeRegistry from "@/src/components/ThemeRegistry/ThemeRegistry";
 import HeaderVisibility from "@/src/components/layout/HeaderVisibility";
@@ -41,11 +41,10 @@ export default function RootLayout({
               <AuthProvider>
                 <AiStylistChatProvider>
                   <HeaderVisibility>
-                    <>
+                    <AiStylistFloatingVisibility>
                       {children}
-                      <AiStylistChatFloatingButton />
-                      <AiStylistChatModal />
-                    </>
+                    </AiStylistFloatingVisibility>
+                    <AiStylistChatModal />
                   </HeaderVisibility>
                 </AiStylistChatProvider>
               </AuthProvider>
